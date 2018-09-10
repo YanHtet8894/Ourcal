@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+     <head>
+     <title>Hope Calculator</title>
+
+<style type="text/css">
+.txt{//for text box
+padding:8px;
+margin:4px 2px;
+font-size:17px;
+width:146px;
+height:30px;
+border-radius:10px;
+border:solid 1px black;
+}
+
+.btn{//for button
+padding:12px;
+margin:4px 6px;
+font-size:18px;
+text-align:center;
+width:49px;
+height:25px;
+border-radius:15px;
+border:solid 1px black;
+}
+</style>
+</head>
+<body>
+<table border=4 width=266 height=70 >
+ <form name="Calculator" action="">
+ <tr> <td >
+<input type="text" class="txt" name="result"  readonly/>
+</tr> </td >
+
+<tr> <td><table rules="all">
+<input type="button" value="1" class="btn" onclick="NumPressed(1)">
+ <input  type="button" value="2" class="btn" onclick="NumPressed(2)">        
+  <input  type="button" value="3" class="btn" onclick="NumPressed(3)">
+  <input  type="button" value="+" class="btn" onclick="Operation('+')">
+  </td></tr>
+
+<tr>  <td><table rules="all">
+<input  type="button" value="4" class="btn" onclick="NumPressed(4)">
+<input  type="button" value="5" class="btn" onclick="NumPressed(5)">        
+  <input type="button" value="6" class="btn" onclick="NumPressed(6)">
+ <input  type="button" value="-" class="btn" onclick="Operation('-')">
+</td></tr>
+
+<tr>  <td><table rules="all">
+<input  type="button" value="7" class="btn" onclick="NumPressed(7)">
+ <input  type="button" value="8" class="btn" onclick="NumPressed(8)">        
+  <input  type="button" value="9" class="btn" onclick="NumPressed(9)">
+<input  type="button" value="*" class="btn" onclick="Operation('*')">
+</td></tr>
+
+<tr> <td><table rules="all">
+<input  type="button" value="c" class="btn" onclick="Clear()">
+<input  type="button" value="0" class="btn" onclick="NumPressed(0)">
+<input  type="button" value="=" class="btn" onclick="Operation('=')">  
+<input  type="button" value="/" class="btn" onclick="Operation('/')">
+</td></tr>
+</table>
+
+<script>
+
+var calculator = document.Calculator;
+var accumulate = 0;
+var flag= false;
+var operator = "";
+
+function NumPressed (Num) {
+	if (flag)
+	 {
+		calculator.result.value  = Num;
+		flag= false;
+ 	  }
+	else {
+		if (calculator.result.value == "0")
+		calculator.result.value = Num;
+		else
+		calculator.result.value += Num;
+  	      }
+}
+
+function Operation (Op) {
+	var answer = calculator.result.value;
+	if (flag&&operator != "=");
+	else
+	{
+		flag = true;
+		if ( '+' == operator )
+		accumulate += parseInt(answer);
+		else if ( '-' == operator )
+		accumulate -= parseInt(answer);
+		else if ( '/' == operator  )
+		accumulate /= parseInt(answer);
+		else if ( '*' == operator  )
+		accumulate *= parseInt(answer);
+		else
+		accumulate = parseInt(answer);
+		calculator.result.value = accumulate;
+		operator = Op;
+  	 }
+}
+
+
+function Clear () {
+	operator = "";
+	calculator.result.value = "";
+	flag = true;
+}
+
+</script>
+</form>
+</body>
+</html>
